@@ -2,7 +2,7 @@ exports.handler = function( event, context ) {
 
     var http = require( 'https' );
 
-    var url = 'https://steamgaug.es/api/v2';
+    var url = 'https://steamgaug.es/api/v2'; //This picks up Data from API Provided by SteamGaug
 
     http.get( url, function( response ) {
 
@@ -13,15 +13,14 @@ exports.handler = function( event, context ) {
         response.on( 'end', function() {
 
             var json = JSON.parse( data );
-            var status = (json.ISteamClient.online);
+            var status = (json.ISteamClient.online); //Gets Status If 0 then Offline if 1 Then Online
             var text = 'Steam is Currently ';
-//            text+=status+" Online ";
         if (status > 0){
-            text+=" Online ";
+            text+=" Online "; //If Number is greater than 1 then output that Steam is Online
             output( text, context );
         } 
         else{
-            text+=" Offline";
+            text+=" Offline"; //If Number less than or not 1 then output that Steam is Offline
             output( text, context );
         }
 
